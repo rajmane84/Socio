@@ -1,1 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap');
 @import "tailwindcss";
+
+:root {
+  --font-default: "Sora", sans-serif;
+}
+
+@theme {
+    --color-background: #FEF4DC;
+    --color-primary: #7B6DB8;
+    --color-secondary: #73B2AC;
+    --color-alert: #BE1F1E;
+    --color-heading: var(--color-neutral-400);
+    --color-para: var(--color-neutral-200);
+    --shadow-neo: 4px 4px 0px 0px var(--color-black);
+    --font-heading: "Playfair Display", serif;
+}
+
+body {
+  font-family: var(--font-default);
+}
