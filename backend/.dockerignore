@@ -1,0 +1,52 @@
+# Node modules should not be copied into the image
+node_modules
+
+# Local environment files
+.env
+.env.*  
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
+
+# OS / Editor-specific files
+.DS_Store
+*.swp
+*.swo
+*.bak
+*.tmp
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docker ignore itself
+.dockerignore
+
+# Prettier and lint configs (optional, not needed inside container)
+.prettierignore
+.eslintignore
+.prettierrc
+.eslintrc
+*.config.js
+
+# Prisma-related files you don't need inside the container
+prisma/migrations/
+prisma/generated/
+generated/
+generated/prisma/
+
+# Optional: Ignore local database dumps
+*.sql
+*.dump
+
+# Ignore test coverage
+coverage
+
+# Build output
+dist
+build
+*.tsbuildinfo

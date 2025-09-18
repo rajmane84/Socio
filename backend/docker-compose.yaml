@@ -1,0 +1,35 @@
+services:
+  postgres:
+    image: postgres:16.9-alpine
+    environment:
+      POSTGRES_USER: socio
+      POSTGRES_PASSWORD: socio
+      POSTGRES_DB: socio_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata_socio:/var/lib/postgresql/data
+  socio-redis:
+    image: redis:7.2-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data # Data is persistence because (data not lost when container restarts)
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: socio_backend
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgres://socio:socio@postgres:5432/socio_db
+      REDIS_HOST: socio-redis
+    ports:
+      - "5001:5001"
+    depends_on:
+      - postgres
+      - socio-redis
+volumes:
+  pgdata_socio:
+  redis_data:
