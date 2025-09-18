@@ -1,13 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "../../components/button";
-import { Asterisk, GoogleIcon } from "../../components/icons";
+import { Asterisk } from "../../components/icons";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { handleUserLogin } from "../../helpers/auth.helper";
 import { Link, useNavigate } from "react-router";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 
-type Inputs = {
+type LoginInputs = {
   username: string;
   password: string;
 };
@@ -17,13 +17,13 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<LoginInputs>();
 
   const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   //This function is not yet completed
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
+  const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     const userInfo = handleUserLogin(data);
     if (!userInfo) return;
     navigate("/");
@@ -113,18 +113,6 @@ function Login() {
           {/* Buttons */}
           <Button variant="primary" className="mt-4 px-4 py-2">
             Login
-          </Button>
-          <div className="relative mt-2 flex items-center justify-center">
-            <span className="absolute bg-white px-2 text-sm">or</span>
-            <div className="h-[1px] w-full bg-black"></div>
-          </div>
-          <Button
-            variant="ghost"
-            type="submit"
-            className="flex items-center justify-center gap-1 px-4 py-2"
-          >
-            <GoogleIcon />
-            Login With Google
           </Button>
 
           {/* Sign Up */}

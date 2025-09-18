@@ -7,3 +7,12 @@ export type LoginResponse = {
   };
   token: string;
 }
+
+export type SignUpResponse = {
+  user: {
+    id: number;
+    username: string;
+    email: string;
+  };
+  token: string;
+}
