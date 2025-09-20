@@ -10,6 +10,7 @@ type SignUpInputs = {
   name: string;
   password: string;
   email: string;
+  username: string;
 };
 
 function SignUp() {
@@ -22,18 +23,18 @@ function SignUp() {
   const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
-  //This function is not yet completed
+  // This function is not yet completed
   const onSubmit: SubmitHandler<SignUpInputs> = (data) => {
     console.log(data);
-    const userInfo = "xyz"
+    const userInfo = "xyz";
     if (!userInfo) return;
     navigate("/");
   };
 
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-      {/* Left Section */}
-      <div className="bg-background flex items-center justify-center p-6">
+      {/* Left Section (scrollable form) */}
+      <div className="bg-background flex items-center justify-center overflow-y-auto p-6">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="shadow-neo flex w-full max-w-md flex-col gap-5 rounded-lg bg-white px-8 py-8 sm:px-12"
@@ -58,7 +59,7 @@ function SignUp() {
             <input
               type="text"
               id="name"
-              placeholder="Enter name"
+              placeholder="Full Name"
               autoComplete="name"
               {...register("name", {
                 required: true,
@@ -66,7 +67,31 @@ function SignUp() {
               className="rounded-md border-2 border-black px-4 py-2"
             />
             {errors.name?.type === "required" && (
+              <span className="text-alert text-sm">Name is required</span>
+            )}
+          </div>
+
+          {/* Username */}
+          <div className="relative flex flex-col gap-2">
+            <Asterisk className="absolute top-0.5 left-22 size-3" />
+            <label htmlFor="username" className="font-bold">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Username"
+              autoComplete="username"
+              {...register("username", { required: true, minLength: 3 })}
+              className="rounded-md border-2 border-black px-4 py-2"
+            />
+            {errors.username?.type === "required" && (
               <span className="text-alert text-sm">Username is required</span>
+            )}
+            {errors.username?.type === "minLength" && (
+              <span className="text-alert text-sm">
+                Username must be at least 3 characters
+              </span>
             )}
           </div>
 
@@ -80,14 +105,14 @@ function SignUp() {
               type="text"
               id="email"
               placeholder="socio@example.com"
-              autoComplete="socio@example.com"
+              autoComplete="email"
               {...register("email", {
                 required: true,
               })}
               className="rounded-md border-2 border-black px-4 py-2"
             />
             {errors.email?.type === "required" && (
-              <span className="text-alert text-sm">Username is required</span>
+              <span className="text-alert text-sm">Email is required</span>
             )}
           </div>
 
@@ -117,7 +142,7 @@ function SignUp() {
             <input
               type={isPasswordVisible ? "text" : "password"}
               id="password"
-              placeholder="Enter password"
+              placeholder="Password"
               autoComplete="current-password"
               {...register("password", { required: true, minLength: 8 })}
               className="rounded-md border-2 border-black px-4 py-2"
@@ -147,8 +172,8 @@ function SignUp() {
         </form>
       </div>
 
-      {/* Right Section */}
-      <div className="hidden h-full items-center justify-center bg-yellow-300 lg:flex">
+      {/* Right Section (sticky logo) */}
+      <div className="sticky top-0 hidden h-screen items-center justify-center bg-yellow-300 lg:flex">
         <img src="/Socio-logo.png" alt="logo" className="size-20" />
       </div>
     </div>

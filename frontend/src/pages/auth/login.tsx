@@ -8,7 +8,7 @@ import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
 
 type LoginInputs = {
-  username: string;
+  identifier: string; // can be username or email
   password: string;
 };
 
@@ -22,7 +22,7 @@ function Login() {
   const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
-  //This function is not yet completed
+  // This function is not yet completed
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     const userInfo = handleUserLogin(data);
     if (!userInfo) return;
@@ -31,8 +31,8 @@ function Login() {
 
   return (
     <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-      {/* Left Section */}
-      <div className="bg-background flex items-center justify-center p-6">
+      {/* Left Section (scrollable) */}
+      <div className="bg-background flex items-center justify-center overflow-y-auto p-6">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="shadow-neo flex w-full max-w-md flex-col gap-5 rounded-lg bg-white px-8 py-8 sm:px-12"
@@ -48,24 +48,24 @@ function Login() {
             </p>
           </div>
 
-          {/* Username */}
+          {/* Identifier (username or email) */}
           <div className="relative flex flex-col gap-2">
-            <Asterisk className="absolute top-0.5 left-22 size-3" />
-            <label htmlFor="username" className="font-bold">
-              Username
+            <Asterisk className="absolute top-0.5 left-40 size-3" />
+            <label htmlFor="identifier" className="font-bold">
+              Username or Email
             </label>
             <input
               type="text"
-              id="username"
-              placeholder="Enter username"
+              id="identifier"
+              placeholder="Username or Email"
               autoComplete="username"
-              {...register("username", {
-                required: true,
-              })}
+              {...register("identifier", { required: true })}
               className="rounded-md border-2 border-black px-4 py-2"
             />
-            {errors.username?.type === "required" && (
-              <span className="text-alert text-sm">Username is required</span>
+            {errors.identifier?.type === "required" && (
+              <span className="text-alert text-sm">
+                Username or Email is required
+              </span>
             )}
           </div>
 
@@ -95,7 +95,7 @@ function Login() {
             <input
               type={isPasswordVisible ? "text" : "password"}
               id="password"
-              placeholder="Enter password"
+              placeholder="Password"
               autoComplete="current-password"
               {...register("password", { required: true, minLength: 8 })}
               className="rounded-md border-2 border-black px-4 py-2"
@@ -125,8 +125,8 @@ function Login() {
         </form>
       </div>
 
-      {/* Right Section */}
-      <div className="hidden h-full items-center justify-center bg-yellow-300 lg:flex">
+      {/* Right Section (sticky logo) */}
+      <div className="sticky top-0 hidden h-screen items-center justify-center bg-yellow-300 lg:flex">
         <img src="/Socio-logo.png" alt="logo" className="size-20" />
       </div>
     </div>
