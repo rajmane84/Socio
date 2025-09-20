@@ -1,0 +1,30 @@
+import { Plus } from "lucide-react";
+
+export function Suggestions() {
+  return (
+    <div className="sticky top-0 hidden h-screen flex-col gap-4 border-l-2 border-black pl-4 px-2 lg:flex">
+      <h1 className="mt-3 text-xl font-semibold tracking-tight">Suggestions</h1>
+      <div className="flex flex-col gap-3">
+        <SuggestionComponent />
+        <SuggestionComponent />
+        <SuggestionComponent />
+      </div>
+    </div>
+  );
+}
+
+function SuggestionComponent() {
+  return (
+    <div className="flex h-15 w-full items-center justify-between border-b-2">
+      <div className="flex items-center gap-2">
+        <div className="border-primary size-10 overflow-hidden rounded-full border-2">
+          <img src="/avatar.webp" className="size-full object-cover" />
+        </div>
+        <p className="text-sm">Raj Mane</p>
+      </div>
+      <div className="bg-secondary size-8 rounded-full flex items-center justify-center text-white cursor-pointer">
+        <Plus />
+      </div>
+    </div>
+  );
+}
