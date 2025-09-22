@@ -1,4 +1,4 @@
-import { Bookmark, Home, Mail, Search, User } from "lucide-react";
+import { Bell, Bookmark, Home, Mail, Search, User } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "./button";
 import clsx from "clsx";
@@ -31,6 +31,11 @@ const sidebarItems: SidebarItem[] = [
     href: "/bookmarks",
   },
   {
+    title: "Notifications",
+    icon: <Bell />,
+    href: "/notifications",
+  },
+  {
     title: "Profile",
     icon: <User />,
     href: "/profile",
@@ -53,9 +58,11 @@ export function SideBar() {
           key={index}
         />
       ))}
-      <Button 
-      onClick={() => navigate("/create-post")}
-      variant="primary" className="mt-2 cursor-pointer py-2">
+      <Button
+        onClick={() => navigate("/create-post")}
+        variant="primary"
+        className="mt-2 cursor-pointer py-2"
+      >
         Create New Post
       </Button>
     </div>

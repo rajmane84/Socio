@@ -25,7 +25,7 @@ export function MobileFooter() {
     {
       title: "Like",
       icon: <Heart />,
-      href: "/likes",
+      href: "/notifications",
     },
     {
       title: "Profile",
