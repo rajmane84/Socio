@@ -1,9 +1,14 @@
+type AvatarProps = {
+  size?: string;
+  href: string;
+};
 
-// make it dynamic and take size from prop
-export function avatar() {
+export function Avatar({ size = "15", href = "/avatar.webp" }: AvatarProps) {
   return (
-    <div className="border-primary size-15 overflow-hidden rounded-full border-2">
-      <img src="/avatar.webp" className="size-full object-cover" />
+    <div
+      className={`border-primary size-${size} overflow-hidden rounded-full border-2`}
+    >
+      <img src={href} className="size-full object-cover" />
     </div>
   );
 }

@@ -28,19 +28,23 @@ export async function handleUserLogin({
   }
 }
 
-export async function handleUserSignUp({
-  name,
-  email,
-  password,
-}: {
+type SignupPayload = {
   name: string;
+  username: string;
   email: string;
   password: string;
-}): Promise<SignUpResponse | undefined> {
+};
+
+export async function handleUserSignUp({
+  name,
+  username,
+  email,
+  password,
+}: SignupPayload): Promise<SignUpResponse | undefined> {
   try {
-    const response = await axios.post(
+    const response = await axios.post<SignUpResponse>(
       `${import.meta.env.VITE_API_URL}/auth/sign-up`,
-      { name, email, password },
+      { name, username, email, password },
       { withCredentials: true },
     );
 

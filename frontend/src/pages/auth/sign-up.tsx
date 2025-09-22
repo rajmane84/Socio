@@ -5,6 +5,7 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { Eye, EyeClosed } from "lucide-react";
 import { useState } from "react";
+import { handleUserSignUp } from "../../helpers/auth.helper";
 
 type SignUpInputs = {
   name: string;
@@ -22,13 +23,16 @@ function SignUp() {
 
   const navigate = useNavigate();
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   // This function is not yet completed
   const onSubmit: SubmitHandler<SignUpInputs> = (data) => {
-    console.log(data);
-    const userInfo = "xyz";
-    if (!userInfo) return;
-    navigate("/");
+    const {email, name, password, username} = data;
+    // const userInfo = "xyz";
+    // if (!userInfo) return;
+    // navigate("/");
+
+    handleUserSignUp({name, email, password, username}).then((res) => {})
   };
 
   return (

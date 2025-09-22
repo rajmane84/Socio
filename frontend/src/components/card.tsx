@@ -1,13 +1,15 @@
 import { Heart, Bookmark, MessageCircle, Send } from "lucide-react";
 import { DotsVertical } from "./icons";
 import { useState } from "react";
+import clsx from "clsx";
 
 export function Card() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
   return (
     <div className="shadow-neo relative z-1 flex h-fit w-full max-w-lg flex-col gap-5 rounded-md border-2 border-black bg-white p-6">
-
       <DotsVertical
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         className="absolute top-4 right-3 cursor-pointer"
@@ -16,12 +18,10 @@ export function Card() {
       {isMenuOpen && <DropdownMenu />}
 
       <div className="flex items-center gap-3">
-        <div className="size-11 overflow-hidden rounded-full border-2 border-black">
-          <img
-            src="/avatar.webp"
-            alt="User avatar"
-            className="size-full object-cover"
-          />
+        <div
+          className={`border-primary size-11 overflow-hidden rounded-full border-2`}
+        >
+          <img src="/avatar.webp" className="size-full object-cover" />
         </div>
         <div>
           <h2 className="text-md font-semibold tracking-tight text-black">
@@ -41,11 +41,23 @@ export function Card() {
         </div>
         <div className="flex h-10 items-center justify-between">
           <div className="flex items-center gap-3">
-            <Heart className="size-6 cursor-pointer fill-red-500 stroke-red-500" />
+            <Heart
+              onClick={() => setIsLiked(!isLiked)}
+              className={clsx(
+                "size-7 cursor-pointer stroke-black",
+                isLiked ? "fill-red-500" : "fill-none",
+              )}
+            />
             <MessageCircle className="size-6 cursor-pointer" />
             <Send className="size-6 cursor-pointer" />
           </div>
-          <Bookmark className="size-6 cursor-pointer" />
+          <Bookmark
+            onClick={() => setIsBookmarked(!isBookmarked)}
+            className={clsx(
+              "size-7 cursor-pointer stroke-black",
+              isBookmarked ? "fill-yellow-400" : "fill-none",
+            )}
+          />
         </div>
       </div>
     </div>

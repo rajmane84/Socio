@@ -1,4 +1,6 @@
-import { Plus } from "lucide-react";
+import clsx from "clsx";
+import { Check, Plus } from "lucide-react";
+import { useState } from "react";
 
 export function Suggestions() {
   return (
@@ -14,6 +16,7 @@ export function Suggestions() {
 }
 
 function SuggestionComponent() {
+  const [sendRequest, setSendRequest] = useState<boolean>(false);
   return (
     <div className="flex h-15 w-full items-center justify-between border-b-2">
       <div className="flex items-center gap-2">
@@ -22,8 +25,14 @@ function SuggestionComponent() {
         </div>
         <p className="text-sm">Raj Mane</p>
       </div>
-      <div className="bg-secondary size-8 rounded-full flex items-center justify-center text-white cursor-pointer">
-        <Plus />
+      <div
+        onClick={() => setSendRequest(true)}
+        className={clsx(
+          "flex size-8 cursor-pointer items-center justify-center rounded-full text-white",
+          !sendRequest ? "bg-secondary" : "bg-green-500",
+        )}
+      >
+        {!sendRequest ? <Plus /> : <Check />}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 // Add correct type over here
 export type LoginResponse = {
   user: {
-    id: number;
+    id: string;
     username: string;
     email: string;
   };
@@ -9,10 +9,8 @@ export type LoginResponse = {
 }
 
 export type SignUpResponse = {
-  user: {
-    id: number;
+    id: string;
+    name: string;
     username: string;
     email: string;
-  };
-  token: string;
 }

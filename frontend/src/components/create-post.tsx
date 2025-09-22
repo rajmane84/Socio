@@ -1,47 +1,43 @@
 import { Camera, MapPin, Images, Smile } from "lucide-react";
 import { Button } from "./button";
 import { useState } from "react";
+import { Avatar } from "./avatar";
+import clsx from "clsx";
 
 export function CreatePost() {
 
     const items = [
       {
         title: "Camera",
-        icon: <Camera className="text-neutral-400" />,
+        icon: <Camera className="hover:text-primary text-neutral-400" />,
       },
       {
         title: "Images",
-        icon: <Images className="text-neutral-400" />,
+        icon: <Images className="hover:text-primary text-neutral-400" />,
       },
       {
         title: "Location",
-        icon: <MapPin className="text-neutral-400" />,
+        icon: <MapPin className="hover:text-primary text-neutral-400" />,
       },
       {
         title: "Emojis",
-        icon: <Smile className="text-neutral-400" />,
+        icon: <Smile className="hover:text-primary text-neutral-400" />,
       },
     ];
 
     const [input, setInput] = useState<string>("");
 
   return (
-    <div className="shadow-neo z-5 flex w-full h-fit max-w-lg flex-col rounded-md border-2">
-      <div className="flex items-start gap-3 p-4 bg-white rounded-md">
+    <div className="shadow-neo z-5 flex h-fit w-full max-w-lg flex-col rounded-md border-2">
+      <div className="flex items-start gap-3 rounded-md bg-white p-4">
         {/* User Avatar */}
-        <div className="border-primary size-12 overflow-hidden rounded-full border-2">
-          <img
-            src="/avatar.webp"
-            alt="User avatar"
-            className="size-full object-cover"
-          />
-        </div>
+        <Avatar href="/avatar.webp" size="12" />
         {/* Textarea */}
         <textarea
           placeholder="What's on your mind?"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className="flex-1 resize-none rounded-md bg-transparent p-2 text-sm outline-none focus:ring-0 placeholder:text-neutral-400"
+          className="flex-1 resize-none rounded-md bg-transparent p-2 text-sm outline-none placeholder:text-neutral-400 focus:ring-0"
           rows={3}
         />
       </div>
@@ -50,13 +46,17 @@ export function CreatePost() {
           {items.map((item) => (
             <div
               key={item.title}
-              className="flex size-10 items-center justify-center rounded-full bg-white shadow-sm cursor-pointer"
+              className={clsx(
+                "flex size-10 cursor-pointer items-center justify-center rounded-full bg-white shadow-sm",
+              )}
             >
               {item.icon}
             </div>
           ))}
         </div>
-        <Button variant="primary" className="cursor-pointer">Share</Button>
+        <Button variant="primary" className="cursor-pointer">
+          Share
+        </Button>
       </div>
     </div>
   );

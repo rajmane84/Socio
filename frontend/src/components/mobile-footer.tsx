@@ -1,15 +1,15 @@
+import clsx from "clsx";
 import { Heart, Home as HomeIcon, Search, User } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 type footerItem = {
-  title: string,
-  icon: React.ReactNode,
-  href: string,
-}
+  title: string;
+  icon: React.ReactNode;
+  href: string;
+};
 
-export function MobileFooter(n) {
-  const [isSelected, setIsSelected] = useState("Home");
+export function MobileFooter() {
+  const location = useLocation();
 
   const footer: footerItem[] = [
     {
@@ -35,17 +35,17 @@ export function MobileFooter(n) {
   ];
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-10 flex h-14 w-full items-center justify-around bg-white md:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-50 flex h-14 w-full items-center justify-around bg-white md:hidden">
       {footer.map((item) => (
         <Link
           to={item.href}
           key={item.title}
-          onClick={() => setIsSelected(item.title)}
-          className={`flex size-10 items-center justify-center ${
-            isSelected === item.title
+          className={clsx(
+            "flex size-10 items-center justify-center",
+            location.pathname === item.href
               ? "bg-secondary rounded-sm border-2 border-black text-white"
-              : "text-black"
-          }`}
+              : "text-black",
+          )}
         >
           {item.icon}
         </Link>
